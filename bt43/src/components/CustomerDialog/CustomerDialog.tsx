@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import type { Customer } from '../CommonTable/CommonTable'; // Tái sử dụng type Customer
 
-// Khai báo những dữ liệu/hàm mà Thằng Cha (Manager) sẽ truyền xuống cho Thằng Con (Dialog)
+// Khai báo những dữ liệu/hàm mà Cha (Manager) sẽ truyền xuống cho Con (Dialog)
 interface CustomerDialogProps {
     open: boolean;                                     // Trạng thái bật/tắt popup
     onClose: () => void;                               // Hàm chạy khi bấm nút "Hủy" hoặc đóng

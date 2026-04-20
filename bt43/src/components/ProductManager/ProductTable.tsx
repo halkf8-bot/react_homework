@@ -1,20 +1,17 @@
-// File: src/components/ProductManager/ProductTable.tsx
 import {
     Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button
 } from '@mui/material';
 
-// Định nghĩa kiểu dữ liệu cho Category
 export interface CategoryInfo {
     id: number;
     name: string;
 }
 
-// Định nghĩa cấu trúc Product khớp với API của thầy
 export interface Product {
     id?: number;
     name: string;
-    category?: CategoryInfo; // Dùng khi GET (hiển thị)
-    categoryId?: number;     // Dùng khi POST/PUT (thêm/sửa)
+    category?: CategoryInfo;
+    categoryId?: number;
     imageUrl?: string;
     imageId?: string;
     sku: string;

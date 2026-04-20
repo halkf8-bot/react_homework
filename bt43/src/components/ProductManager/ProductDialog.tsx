@@ -33,14 +33,13 @@ export default function ProductDialog({
                         onChange={e => setFormData({ ...formData, name: e.target.value })}
                     />
 
-                    {/* ===== AUTOCOMPLETE NÂNG CAO CHO OBJECT ===== */}
                     <Autocomplete
                         options={categories}
                         getOptionLabel={(option) => option.name} // Khai báo trường dùng để hiển thị chữ
                         value={selectedCategory}
                         isOptionEqualToValue={(option, value) => option.id === value?.id}
                         onChange={(event, newValue) => {
-                            // Khi chọn, ta chỉ lưu categoryId vào formData để gửi lên API
+                            // Khi chọn, chỉ lưu categoryId vào formData để gửi lên API
                             setFormData({ ...formData, categoryId: newValue ? newValue.id : undefined });
                         }}
                         renderInput={(params) => (

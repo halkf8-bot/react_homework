@@ -18,7 +18,7 @@ const initialFormState: Product = { name: '', price: '', remaining: '', sku: '',
 
 export default function ProductManager({ onLogout }: ManagerProps) {
     const [products, setProducts] = useState<Product[]>([]);
-    // 1. Thêm State để chứa danh sách Category thật từ API
+    // 1. Thêm State để chứa danh sách Category từ API
     const [categories, setCategories] = useState<CategoryInfo[]>([]);
 
     const [search, setSearch] = useState('');
@@ -28,10 +28,10 @@ export default function ProductManager({ onLogout }: ManagerProps) {
     const [editId, setEditId] = useState<number | null>(null);
     const [deleteId, setDeleteId] = useState<number | null>(null);
 
-    // 2. Gọi cả 2 API lấy dữ liệu khi Component vừa load lên
+    // 2. Gọi cả 2 API lấy dữ liệu khi Component vừa load
     useEffect(() => {
         fetchProducts();
-        fetchCategories(); // Gọi hàm lấy danh mục
+        fetchCategories();
     }, []);
 
     const fetchProducts = async () => {

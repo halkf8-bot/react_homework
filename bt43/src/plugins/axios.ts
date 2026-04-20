@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// 1. Khởi tạo api với baseURL và các header cơ bản
 const api = axios.create({
     baseURL: '/api',
     headers: {
@@ -8,10 +7,9 @@ const api = axios.create({
     }
 });
 
-// 2. Cài đặt Interceptor: "Trạm chặn" trước khi request được gửi đi
 api.interceptors.request.use(
     (config) => {
-        // Lấy token từ localStorage (Giả sử lúc đăng nhập bạn đã lưu vào đây)
+        // Lấy token từ localStorage (vd lúc đăng nhập đã lưu vào đây)
         const token = localStorage.getItem('token');
 
         // Nếu có token, tự động gắn vào Header Authorization

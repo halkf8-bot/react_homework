@@ -1,12 +1,8 @@
-// File: src/App.tsx
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-
 import Login from './components/Login/Login';
-
-// 1. IMPORT PRODUCT MANAGER THAY VÌ CUSTOMER MANAGER
 import ProductManager from './components/ProductManager/ProductManager';
 
 export default function App() {
@@ -39,7 +35,7 @@ export default function App() {
                     path="/products"
                     element={
                         <ProtectedRoute>
-                            {/* 2. GỌI COMPONENT PRODUCT MANAGER Ở ĐÂY */}
+                            {/* GỌI COMPONENT PRODUCT MANAGER */}
                             <ProductManager onLogout={handleLogout} />
                         </ProtectedRoute>
                     }
