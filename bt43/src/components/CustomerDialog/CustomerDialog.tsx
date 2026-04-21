@@ -2,7 +2,7 @@ import {
     Button, TextField, MenuItem,
     Dialog, DialogActions, DialogContent, DialogTitle
 } from '@mui/material';
-import type { Customer } from '../CommonTable/CommonTable'; // Tái sử dụng type Customer
+import type { Customer } from '../CommonTable/CommonTable';
 
 // Khai báo những dữ liệu/hàm mà Cha (Manager) sẽ truyền xuống cho Con (Dialog)
 interface CustomerDialogProps {

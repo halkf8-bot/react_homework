@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import api from '../../plugins/axios';
-
 import {
-    Box, Button, TextField, Typography, Container,
+    Button, Container,
     Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText
 } from '@mui/material';
-
 import ProductTable, { type Product, type CategoryInfo } from './ProductTable';
 import ProductDialog from './ProductDialog';
+import PageHeader from "../PageHeader/PageHeader";
 
 interface ManagerProps {
     onLogout: () => void;
@@ -104,20 +103,15 @@ export default function ProductManager({ onLogout }: ManagerProps) {
 
     return (
         <Container maxWidth="lg" sx={{ mt: 4 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-                <Typography variant="h4" sx={{ fontWeight: 'bold' }}>Quản lý Sản phẩm</Typography>
-                <Button variant="outlined" color="error" onClick={onLogout}>Đăng xuất</Button>
-            </Box>
-
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-                <TextField
-                    label="Tìm kiếm tên, SKU..." variant="outlined" size="small"
-                    value={search} onChange={e => setSearch(e.target.value)} sx={{ width: '350px' }}
-                />
-                <Button variant="contained" color="success" onClick={() => openModal()}>
-                    + Thêm Sản phẩm
-                </Button>
-            </Box>
+            <PageHeader
+                title="Quản lý Sản phẩm"
+                searchPlaceholder="Tìm kiếm tên, SKU..."
+                searchValue={search}
+                onSearchChange={setSearch}
+                addButtonText="+ Thêm Sản phẩm"
+                onAddClick={() => openModal()}
+                onLogout={onLogout}
+            />
 
             <ProductTable data={filteredProducts} onEdit={openModal} onDelete={setDeleteId} />
 
@@ -128,7 +122,7 @@ export default function ProductManager({ onLogout }: ManagerProps) {
                 setFormData={setFormData}
                 onSave={handleSave}
                 isEdit={Boolean(editId)}
-                categories={categories} // 4. Truyền dữ liệu thật đã lấy từ API xuống Form
+                categories={categories}
             />
 
             <Dialog open={Boolean(deleteId)} onClose={() => setDeleteId(null)}>

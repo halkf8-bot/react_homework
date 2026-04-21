@@ -2,7 +2,6 @@ import {
     Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button
 } from '@mui/material';
 
-// 1. Định nghĩa lại interface Customer để dùng trong component này
 export interface Customer {
     id?: number;
     name: string;
@@ -12,11 +11,11 @@ export interface Customer {
     rank: string;
 }
 
-// 2. Định nghĩa Props: Những dữ liệu mà component Cha sẽ truyền xuống cho bảng này
+// Props: Những dữ liệu mà component Cha sẽ truyền xuống cho bảng này
 interface CommonTableProps {
-    data: Customer[]; // Mảng dữ liệu khách hàng
-    onEdit: (customer: Customer) => void; // Hàm chạy khi bấm nút "Sửa"
-    onDelete: (id: number) => void; // Hàm chạy khi bấm nút "Xóa"
+    data: Customer[];
+    onEdit: (customer: Customer) => void; //
+    onDelete: (id: number) => void; //
 }
 
 export default function CommonTable({ data, onEdit, onDelete }: CommonTableProps) {

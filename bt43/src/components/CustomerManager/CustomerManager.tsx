@@ -2,18 +2,16 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import api from '../../plugins/axios';
 import { Container } from '@mui/material';
-
 import CommonTable, { type Customer } from '../CommonTable/CommonTable';
 import CustomerDialog from '../CustomerDialog/CustomerDialog';
-import CustomerHeader from './CustomerHeader';
-import DeleteConfirmDialog from './DeleteConfirmDialog';
+import DeleteConfirmDialog from '../DeleteConfirmDialog/DeleteConfirmDialog';
+import PageHeader from '../PageHeader/PageHeader';
 
 interface ManagerProps {
     onLogout: () => void;
 }
 
 export default function CustomerManager({ onLogout }: ManagerProps) {
-    // 1. Quản lý trạng thái (State)
     const [customers, setCustomers] = useState<Customer[]>([]);
     const [search, setSearch] = useState('');
     const [showModal, setShowModal] = useState(false);
@@ -21,7 +19,7 @@ export default function CustomerManager({ onLogout }: ManagerProps) {
     const [editId, setEditId] = useState<number | null>(null);
     const [deleteId, setDeleteId] = useState<number | null>(null);
 
-    // 2. Tải dữ liệu ban đầu
+    // Tải dữ liệu ban đầu
     useEffect(() => { fetchCustomers(); }, []);
 
     const fetchCustomers = async () => {
@@ -31,7 +29,7 @@ export default function CustomerManager({ onLogout }: ManagerProps) {
         } catch { toast.error("Lỗi tải danh sách!"); }
     };
 
-    // 3. Các hàm xử lý Logic
+    // Các hàm xử lý Logic
     const executeDelete = async () => {
         if (!deleteId) return;
         try {
@@ -68,7 +66,7 @@ export default function CustomerManager({ onLogout }: ManagerProps) {
         } catch { toast.error("Lưu thất bại!"); }
     };
 
-    // 4. Lọc dữ liệu trước khi truyền vào bảng
+    // Lọc dữ liệu trước khi truyền vào bảng
     const filteredCustomers = customers.filter(c =>
         c.name.toLowerCase().includes(search.toLowerCase()) ||
         c.email.toLowerCase().includes(search.toLowerCase())
@@ -76,9 +74,12 @@ export default function CustomerManager({ onLogout }: ManagerProps) {
 
     return (
         <Container maxWidth="lg" sx={{ mt: 4 }}>
-            <CustomerHeader
-                search={search}
+            <PageHeader
+                title="Quản lý Khách hàng"
+                searchPlaceholder="Tìm kiếm tên, email..."
+                searchValue={search}
                 onSearchChange={setSearch}
+                addButtonText="+ Thêm Khách hàng"
                 onAddClick={() => openModal()}
                 onLogout={onLogout}
             />
