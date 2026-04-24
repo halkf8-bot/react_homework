@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import api from '../../plugins/axios';
-import {
-    Button, Container,
-    Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText
-} from '@mui/material';
+import { Container } from '@mui/material';
 import ProductTable, { type Product, type CategoryInfo } from './ProductTable';
 import ProductDialog from './ProductDialog';
 import PageHeader from "../PageHeader/PageHeader";
+import DeleteConfirmDialog from "../DeleteConfirmDialog/DeleteConfirmDialog"
+
 
 interface ManagerProps {
     onLogout: () => void;
@@ -125,16 +124,12 @@ export default function ProductManager({ onLogout }: ManagerProps) {
                 categories={categories}
             />
 
-            <Dialog open={Boolean(deleteId)} onClose={() => setDeleteId(null)}>
-                <DialogTitle color="error">Xác nhận xóa</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>Bạn có chắc muốn xóa sản phẩm này? Hành động này không thể hoàn tác.</DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={() => setDeleteId(null)} color="inherit">Hủy</Button>
-                    <Button onClick={executeDelete} variant="contained" color="error">Xóa ngay</Button>
-                </DialogActions>
-            </Dialog>
+                <DeleteConfirmDialog
+                    open={Boolean(deleteId)}
+                    onClose={() => setDeleteId(null)}
+                    onConfirm={executeDelete}
+                    itemName="Sản phẩm"
+                />
         </Container>
     );
 }

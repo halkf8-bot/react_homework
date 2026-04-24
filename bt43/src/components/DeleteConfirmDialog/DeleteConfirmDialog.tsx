@@ -4,15 +4,16 @@ interface DeleteConfirmDialogProps {
     open: boolean;
     onClose: () => void;
     onConfirm: () => void;
+    itemName: string;
 }
 
-export default function DeleteConfirmDialog({ open, onClose, onConfirm }: DeleteConfirmDialogProps) {
+export default function DeleteConfirmDialog({ open, onClose, onConfirm, itemName }: DeleteConfirmDialogProps) {
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle color="error">Xác nhận xóa</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    Bạn có chắc chắn muốn xóa khách hàng này không? Hành động này không thể hoàn tác.
+                    Bạn có chắc chắn muốn xóa {itemName} này không? Hành động này không thể hoàn tác.
                 </DialogContentText>
             </DialogContent>
             <DialogActions>

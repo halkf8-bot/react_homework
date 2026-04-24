@@ -6,6 +6,8 @@ import CommonTable, { type Customer } from '../CommonTable/CommonTable';
 import CustomerDialog from '../CustomerDialog/CustomerDialog';
 import DeleteConfirmDialog from '../DeleteConfirmDialog/DeleteConfirmDialog';
 import PageHeader from '../PageHeader/PageHeader';
+import { useDebounce } from '../hooks/useDebounce';
+import type { FormEvent } from 'react';
 
 interface ManagerProps {
     onLogout: () => void;
@@ -18,9 +20,10 @@ export default function CustomerManager({ onLogout }: ManagerProps) {
     const [formData, setFormData] = useState<Customer>({ name: '', email: '', phone: '', address: '', rank: 'BRONZE' });
     const [editId, setEditId] = useState<number | null>(null);
     const [deleteId, setDeleteId] = useState<number | null>(null);
+    const debouncedSearch = useDebounce(search,500);
 
     // Tải dữ liệu ban đầu
-    useEffect(() => { fetchCustomers(); }, []);
+    useEffect(() => { void fetchCustomers(); }, []);
 
     const fetchCustomers = async () => {
         try {
@@ -36,7 +39,7 @@ export default function CustomerManager({ onLogout }: ManagerProps) {
             await api.delete(`/customers/${deleteId}`);
             toast.success("Đã xóa khách hàng!");
             setDeleteId(null);
-            fetchCustomers();
+            setCustomers(prevCustomers => prevCustomers.filter(c => c.id !== deleteId));
         } catch { toast.error("Lỗi khi xóa!"); }
     };
 
@@ -51,25 +54,28 @@ export default function CustomerManager({ onLogout }: ManagerProps) {
         setShowModal(true);
     };
 
-    const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSave = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             if (editId) {
-                await api.put(`/customers/${editId}`, formData);
+                const res = await api.put(`/customers/${editId}`, formData);
                 toast.success("Cập nhật thành công!");
+                setCustomers(prevCustomers =>
+                    prevCustomers.map(c => c.id === editId ? res.data : c)
+                );
             } else {
-                await api.post('/customers', formData);
+                const res = await api.post('/customers', formData);
                 toast.success("Thêm mới thành công!");
+                setCustomers(prevCustomers => [...prevCustomers, res.data]);
             }
             setShowModal(false);
-            fetchCustomers();
         } catch { toast.error("Lưu thất bại!"); }
     };
 
     // Lọc dữ liệu trước khi truyền vào bảng
     const filteredCustomers = customers.filter(c =>
-        c.name.toLowerCase().includes(search.toLowerCase()) ||
-        c.email.toLowerCase().includes(search.toLowerCase())
+        c.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        c.email.toLowerCase().includes(debouncedSearch.toLowerCase())
     );
 
     return (
@@ -103,6 +109,7 @@ export default function CustomerManager({ onLogout }: ManagerProps) {
                 open={Boolean(deleteId)}
                 onClose={() => setDeleteId(null)}
                 onConfirm={executeDelete}
+                itemName="Khách hàng"
             />
         </Container>
     );
