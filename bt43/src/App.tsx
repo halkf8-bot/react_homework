@@ -47,7 +47,7 @@ export default function App() {
                     element={
                         <ProtectedRoute>
                             {/* Bạn có thể truyền thêm onLogout vào Dashboard nếu trong Dashboard bạn có nút Đăng xuất */}
-                            <Dashboard />
+                            <Dashboard onLogout={handleLogout} />
                         </ProtectedRoute>
                     }
                 />

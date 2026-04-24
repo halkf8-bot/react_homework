@@ -11,7 +11,11 @@ const mockOrders: Order[] = [
     { id: 'ORD-004', customerName: 'Phạm Thị D', createdAt: '2023-10-12', value: 800000, status: 'Đã hủy' },
 ];
 
-function Dashboard() {
+interface DashboardProps {
+    onLogout: () => void;
+}
+
+export default function Dashboard({ onLogout } : DashboardProps){
     // 2. CÁC STATE
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
@@ -41,6 +45,12 @@ function Dashboard() {
 
     return (
         <Container maxWidth="lg" sx={{mt: 4}}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+                <Typography variant="h4" sx={{ fontWeight: 'bold' }}>Tổng quan Đơn hàng</Typography>
+                <Button variant="outlined" color="error" onClick={onLogout}>
+                    Đăng xuất
+                </Button>
+            </Box>
             {/* THẺ BÁO CÁO NHANH */}
             <Box sx={{display: 'flex', gap: 2, mb: 3}}>
                 <Card sx={{p: 2, flex: 1, borderLeft: '4px solid #1976d2'}}>
@@ -89,5 +99,3 @@ function Dashboard() {
         </Container>
     );
 }
-
-export default Dashboard
