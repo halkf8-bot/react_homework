@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login/Login';
 import ProductManager from './components/ProductManager/ProductManager';
+import Dashboard from './components/Dashboard/Dashboard';
 
 export default function App() {
     const [token, setToken] = useState<string>(localStorage.getItem('token') || '');
@@ -27,7 +28,7 @@ export default function App() {
                 <Route
                     path="/login"
                     element={
-                        token ? <Navigate to="/products" replace /> : <Login setToken={setToken} />
+                        token ? <Navigate to="/dashboard" replace /> : <Login setToken={setToken} />
                     }
                 />
 
@@ -41,7 +42,19 @@ export default function App() {
                     }
                 />
 
-                <Route path="*" element={<Navigate to="/products" replace />} />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <ProtectedRoute>
+                            {/* Bạn có thể truyền thêm onLogout vào Dashboard nếu trong Dashboard bạn có nút Đăng xuất */}
+                            <Dashboard />
+                        </ProtectedRoute>
+                    }
+                />
+
+                {/*<Route path="*" element={<Navigate to="/products" replace />} />*/}
+                {/* 4. Đổi trang mặc định về /dashboard */}
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
         </BrowserRouter>
     );

@@ -11,7 +11,7 @@ export interface Customer {
     rank: string;
 }
 
-// Props: Những dữ liệu mà component Cha sẽ truyền xuống cho bảng này
+// Props: Những dữ liệu mà component Cha truyền xuống cho bảng này
 interface CommonTableProps {
     data: Customer[];
     onEdit: (customer: Customer) => void; //

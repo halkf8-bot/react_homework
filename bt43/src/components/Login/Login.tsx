@@ -26,7 +26,7 @@ export default function Login({ setToken }: LoginProps) {
                 toast.success("Đăng nhập thành công!");
 
                 // Chuyển hướng người dùng sang trang sản phẩm sau khi có token
-                navigate('/products');
+                navigate('/dashboard');
             } else {
                 toast.error("Đăng nhập thất bại!");
             }

@@ -6,7 +6,7 @@ import CommonTable, { type Customer } from '../CommonTable/CommonTable';
 import CustomerDialog from '../CustomerDialog/CustomerDialog';
 import DeleteConfirmDialog from '../DeleteConfirmDialog/DeleteConfirmDialog';
 import PageHeader from '../PageHeader/PageHeader';
-import { useDebounce } from '../hooks/useDebounce';
+import { useDebounce } from '../Debounce/useDebounce';
 import type { FormEvent } from 'react';
 
 interface ManagerProps {
@@ -22,7 +22,7 @@ export default function CustomerManager({ onLogout }: ManagerProps) {
     const [deleteId, setDeleteId] = useState<number | null>(null);
     const debouncedSearch = useDebounce(search,500);
 
-    // Tải dữ liệu ban đầu
+    // Tải dữ liệu
     useEffect(() => { void fetchCustomers(); }, []);
 
     const fetchCustomers = async () => {

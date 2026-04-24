@@ -45,7 +45,6 @@ export default function ProductTable({ data, onEdit, onDelete }: ProductTablePro
                         <TableRow key={row.id} hover>
                             <TableCell>{row.id}</TableCell>
                             <TableCell>{row.name}</TableCell>
-                            {/* Lấy tên category từ object category trả về */}
                             <TableCell>{row.category?.name || 'N/A'}</TableCell>
                             <TableCell>{row.sku}</TableCell>
                             <TableCell>{row.price}</TableCell>
