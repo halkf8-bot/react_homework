@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Box, TextField, Typography, Button, Container, Card } from '@mui/material';
+import { toast } from 'react-toastify';
 import OrderTable from './OrderTable';
 import type { Order } from './OrderRow';
 
@@ -43,6 +44,24 @@ export default function Dashboard({ onLogout } : DashboardProps){
             .reduce((sum, order) => sum + order.value, 0);
     }, [filteredOrders]); // Phụ thuộc vào mảng đã lọc
 
+    const handleFromDateChange = (val: string) => {
+        // Nếu đã có 'Đến ngày' và giá trị 'Từ ngày' mới chọn lại lớn hơn 'Đến ngày'
+        if (toDate && val > toDate) {
+            toast.error("Lỗi: 'Từ ngày' không được lớn hơn 'Đến ngày'!");
+            return; // Chặn lại, không cho cập nhật state
+        }
+        setFromDate(val); // Nếu hợp lệ thì mới cập nhật
+    };
+
+    const handleToDateChange = (val: string) => {
+        // Nếu đã có 'Từ ngày' và giá trị 'Đến ngày' mới chọn lại nhỏ hơn 'Từ ngày'
+        if (fromDate && val < fromDate) {
+            toast.error("Lỗi: Chọn ngày lớn hơn!");
+            return; // Chặn lại, không cho cập nhật state
+        }
+        setToDate(val); // Nếu hợp lệ thì mới cập nhật
+    };
+
     return (
         <Container maxWidth="lg" sx={{mt: 4}}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
@@ -80,12 +99,14 @@ export default function Dashboard({ onLogout } : DashboardProps){
                 <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 2 }}>Bộ lọc theo ngày</Typography>
                 <Box sx={{display: 'flex', gap: 3, alignItems: 'center'}}>
                     <TextField
-                        label="Từ ngày" type="date" slotProps={{inputLabel: {shrink: true}}} size="small"
-                        value={fromDate} onChange={(e) => setFromDate(e.target.value)}
+                        label="Từ ngày" type="date" slotProps={{ inputLabel: { shrink: true } }} size="small"
+                        value={fromDate}
+                        onChange={(e) => handleFromDateChange(e.target.value)}
                     />
                     <TextField
-                        label="Đến ngày" type="date" slotProps={{ inputLabel: {shrink: true}}} size="small"
-                        value={toDate} onChange={(e) => setToDate(e.target.value)}
+                        label="Đến ngày" type="date" slotProps={{ inputLabel: { shrink: true } }} size="small"
+                        value={toDate}
+                        onChange={(e) => handleToDateChange(e.target.value)}
                     />
                     <Button onClick={() => {
                         setFromDate('');
