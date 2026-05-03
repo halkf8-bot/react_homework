@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import Home from './components/pages/Home';
-import Quiz from './components/pages/Quiz';
-import Result from './components/pages/Result';
+import Home from './pages/Home';
+import Quiz from './pages/Quiz';
+import Result from './pages/Result';
+import HeaderBar from './components/common/HeaderBar';
 import './App.css';
 
-// State lưu đáp án đưa lên component cha cao nhất để truyền sang trang Result
 export type AnswersState = Record<number, number>;
 
 const App: React.FC = () => {
@@ -18,6 +17,8 @@ const App: React.FC = () => {
         <BrowserRouter>
             {/* Nơi chứa các thông báo Toast */}
             <ToastContainer position="top-right" autoClose={3000} />
+
+            <HeaderBar />
 
             <div className="app-container">
                 <Routes>

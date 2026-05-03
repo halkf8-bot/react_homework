@@ -10,7 +10,7 @@ const Home: React.FC = () => {
 
     const handleStart = () => {
         if (selectedType) {
-            navigate('/quiz'); // Chuyển sang trang thi
+            navigate('/quiz');
         } else {
             alert("Vui lòng chọn hạng bằng lái trước!");
         }
@@ -20,7 +20,6 @@ const Home: React.FC = () => {
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
             <h1>Chào mừng đến với hệ thống ôn thi GPLX</h1>
             <div style={{ maxWidth: 300, margin: '20px auto' }}>
-                {/* SỬ DỤNG MUI AUTOCOMPLETE */}
                 <Autocomplete
                     options={licenseTypes}
                     value={selectedType}

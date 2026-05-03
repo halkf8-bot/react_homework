@@ -1,5 +1,5 @@
 // src/plugins/axios.ts
-import axios from 'axios';
+import axios from 'src/plugins/axios.ts';
 
 // Khởi tạo instance của axios
 const api = axios.create({

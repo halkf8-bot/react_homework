@@ -2,7 +2,7 @@ export interface Question {
     id: number;
     text: string;
     options: string[];
-    correctAnswer: number; // Thêm đáp án đúng để chấm điểm
+    correctAnswer: number;
 }
 
 export const questionsData: Question[] = [
@@ -14,7 +14,7 @@ export const questionsData: Question[] = [
             "Là một phần của phần đường xe chạy được chia theo chiều dọc của đường, có bề rộng đủ cho xe chạy an toàn.",
             "Cả 2 ý trên."
         ],
-        correctAnswer: 1 // Đáp án thứ 2 (index 1)
+        correctAnswer: 1
     },
     {
         id: 2,
@@ -26,5 +26,4 @@ export const questionsData: Question[] = [
         ],
         correctAnswer: 1
     }
-    // Mình để 2 câu làm ví dụ ngắn gọn, bạn có thể copy thêm các câu cũ vào đây nhé!
 ];
