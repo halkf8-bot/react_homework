@@ -4,12 +4,19 @@ import { Autocomplete, TextField, Button } from '@mui/material';
 
 const licenseTypes = ['Hạng A1', 'Hạng A2', 'Hạng B1', 'Hạng B2', 'Hạng C'];
 
-const Home: React.FC = () => {
-    const navigate = useNavigate(); // Hook của react-router-dom để chuyển trang
+// 1. Định nghĩa Props để nhận hàm reset từ component cha (App.tsx)
+interface HomeProps {
+    onResetAnswers: () => void;
+}
+
+const Home: React.FC<HomeProps> = ({ onResetAnswers }) => {
+    const navigate = useNavigate();
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
     const handleStart = () => {
         if (selectedType) {
+            // 2. Gọi hàm xóa dữ liệu các câu đã chọn trước khi chuyển trang
+            onResetAnswers();
             navigate('/quiz');
         } else {
             alert("Vui lòng chọn hạng bằng lái trước!");

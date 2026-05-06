@@ -22,7 +22,7 @@ const App: React.FC = () => {
 
             <div className="app-container">
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home onResetAnswers={() => setAnswers({})} />} />
                     <Route path="/quiz" element={<Quiz answers={answers} setAnswers={setAnswers} />} />
                     <Route path="/result" element={<Result answers={answers} />} />
                 </Routes>
