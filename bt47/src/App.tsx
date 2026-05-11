@@ -1,0 +1,13 @@
+// src/App.tsx
+import React from 'react';
+import Spreadsheet from './components/Spreadsheet';
+
+const App: React.FC = () => {
+    return (
+        <div>
+            <Spreadsheet />
+        </div>
+    );
+};
+
+export default App;
