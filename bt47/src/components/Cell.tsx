@@ -37,7 +37,7 @@ const Cell = React.memo(({
         padding: 0,
         width: '100px',
         height: '30px',
-        border: '1px solid #ccc', // Viền luôn luôn là 1px cố định
+        border: '1px solid #ccc'
     };
 
     // 2. Style dùng chung cho cả input và div bên trong (chiếm 100% td)
@@ -52,7 +52,7 @@ const Cell = React.memo(({
         backgroundColor: 'transparent',
         fontFamily: 'inherit',
         fontSize: 'inherit',
-        // Dùng box-shadow lọt lòng (inset) để tạo viền xanh mà KHÔNG làm đổi kích thước ô
+        // Dùng box-shadow lọt lòng (inset) để tạo viền xanh, ko làm đổi kích thước ô
         boxShadow: isActive ? 'inset 0 0 0 2px #1a73e8' : 'none',
     };
 
